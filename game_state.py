@@ -11,16 +11,19 @@ class GameState:
                  snake,
                  direction,
                  food,
+                 obstacle,
                  field_size=20):
         self.snake = snake
         self.direction = direction
         self.field_size = field_size
+        self.obstacle = obstacle
         self.food = food
 
     def set_initial_position(self):
         self.snake = INITIAL_SNAKE[:]
         self.direction = INITIAL_DIRECTION
         self.set_random_food_position()
+        self.set_random_obstacle_position()
 
     def next_head_position(self, direction):
         pos = self.snake[-1]
@@ -42,6 +45,16 @@ class GameState:
             )
             food_in_snake = self.food in self.snake
 
+    def set_random_obstacle_position(self):
+        obstacle_in_snake = True
+        while obstacle_in_snake:
+            self.obstacle = Position(
+                randint(0, self.field_size - 1),
+                randint(0, self.field_size - 1)
+            )
+            obstacle_in_snake = self.obstacle in self.snake or self.obstacle == self.food
+
+
     def can_turn(self, direction):
         new_head = self.next_head_position(direction)
         return new_head != self.snake[-2]
@@ -56,6 +69,11 @@ class GameState:
         new_head = self.next_head_position(self.direction)
 
         if new_head in self.snake:
+            self.set_initial_position()
+            print(f"Zdoybto {points} punktów")
+            return
+
+        if new_head == self.obstacle:
             self.set_initial_position()
             print(f"Zdoybto {points} punktów")
             return
