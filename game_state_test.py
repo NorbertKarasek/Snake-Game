@@ -161,15 +161,15 @@ class GameStateTest(unittest.TestCase):
         self.assertEqual(False, state.food in state.snake)
 
     def test_snake_dies(self):
-        state = GameState(\
-            snake = [Position(1,2),\
-                     Position(2,2),\
-                     Position(3,2),\
-                     Position(3,3),\
-                     Position(2,3)],\
-            direction = Direction.UP,\
-            food = Position(3,1),\
-            field_size = 20)
+        state = GameState(
+            snake=[Position(1, 2),
+                     Position(2, 2),
+                     Position(3, 2),
+                     Position(3, 3),
+                     Position(2, 3)],
+            direction=Direction.UP,
+            food=Position(3, 1),
+            field_size=20)
 
         state.step()
 

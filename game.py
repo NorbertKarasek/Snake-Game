@@ -46,6 +46,7 @@ def draw(snake, food):
     pygame.display.update()
 
 clock = pygame.time.Clock()
+
 while True:
     clock.tick(10)
 
