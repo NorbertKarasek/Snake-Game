@@ -6,7 +6,6 @@ from position import Position
 INITIAL_SNAKE = [Position(1, 2), Position(2, 2), Position(3, 2)]
 INITIAL_DIRECTION = Direction.RIGHT
 
-
 class GameState:
     def __init__(self,
                  snake,
@@ -52,15 +51,19 @@ class GameState:
             self.direction = direction
 
     def step(self):
+        initial_length = len(INITIAL_SNAKE)
+        points = [len(self.snake)-initial_length]
         new_head = self.next_head_position(self.direction)
 
         if new_head in self.snake:
             self.set_initial_position()
+            print(f"Zdoybto {points} punktów")
             return
 
         self.snake.append(new_head)
 
         if new_head == self.food:
             self.set_random_food_position()
+            points.append(+1)
         else:
             self.snake = self.snake[1:]
