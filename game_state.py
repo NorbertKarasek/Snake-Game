@@ -68,12 +68,7 @@ class GameState:
         points = [len(self.snake)-initial_length]
         new_head = self.next_head_position(self.direction)
 
-        if new_head in self.snake:
-            self.set_initial_position()
-            print(f"Zdoybto {points} punktów")
-            return
-
-        if new_head == self.obstacle:
+        if new_head in self.snake or new_head == self.obstacle:
             self.set_initial_position()
             print(f"Zdoybto {points} punktów")
             return
